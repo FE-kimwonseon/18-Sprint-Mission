@@ -1,7 +1,5 @@
 :root {
   --blue: #3692ff;
-  --Secondary400: #9ca3af;
-  --Secondary800: #1f2937;
   --gray900: #111827;
   --gray800: #1f2937;
   --gray700: #374151;
@@ -18,4 +16,9 @@
   --black: #111111;
   --skyblue: #e6f2ff;
   --errorMsg: #f74747;
+}
+
+:root {
+  --Secondary400: #9ca3af;
+  --Secondary800: #1f2937;
 }

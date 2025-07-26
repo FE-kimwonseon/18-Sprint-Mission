@@ -10,43 +10,24 @@ import {
   changeImg,
 } from "./shared_variable.js";
 
+import { validateemail, showError, hideError } from "./validate.js";
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   window.location.href = "/login.html";
 });
 
-// error messsage show
-function showError(inputEle, errorEle, message) {
-  inputEle.style.border = "1px solid #f74747";
-  errorEle.innerHTML = message;
-  errorEle.style.display = "block";
-}
-
-// error message hide
-function hideError(inputEle, errorEle) {
-  inputEle.style.border = "none";
-  errorEle.style.display = "none";
-}
-
 // 이메일 유효성 검사
 userEmail.addEventListener("focusout", () => {
   if (userEmail.value === "") {
     showError(userEmail, emailErrorMsg, errMsg.id.voidOut.trim());
-  } else if (!emailCheck(userEmail.value)) {
+  } else if (!validateemail(userEmail.value)) {
     showError(userEmail, emailErrorMsg, errMsg.id.fail.trim());
   } else {
     hideError(userEmail, emailErrorMsg);
   }
   activeButton();
 });
-
-// 이메일 정규 표현식 체크
-function emailCheck(value) {
-  const emailRegex =
-    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-
-  return emailRegex.test(value);
-}
 
 // 닉네임 유효성 검사
 const userName = document.querySelector("#user_name");
@@ -92,7 +73,7 @@ checkPassword.addEventListener("focusout", () => {
 
 function activeButton() {
   const formValid =
-    emailCheck(userEmail.value) &&
+    validateemail(userEmail.value) &&
     userName.value !== "" &&
     userPassword.value.length >= 8 &&
     userPassword.value === checkPassword.value;
